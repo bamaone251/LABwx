@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KML and KMZ Layers on Google Maps</title>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZC_bksJwstKrqPsnHrrnZAVI91EOFxOw"></script>
+  <style>
+    #map {
+      height: 90vh;
+      width: 100%;
+    }
+    #controls {
+      height: 10vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f1f1f1;
+      padding: 10px;
+    }
+    select {
+      font-size: 16px;
+      padding: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <div id="controls">
+    <label for="layerSelect">Select Layer:</label>
+    <select id="layerSelect">
+      <option value="none" selected>None</option>
+      <option value="layer1">PMSL Day 3</option>
+      <option value="layer2">PMSL 12-Hour White</option>
+      <option value="layer3">QPF 24-Hour Day 1</option>
+      <option value="layer4">QPF72hr_Day1-3</option>
+      <option value="layer5">conus_analysis_latest</option>
+    </select>
+  </div>
+  <script>
+    let map, layer1, layer2, layer3, layer4, layer5;
+
+    function initMap() {
+      // Initialize the map
+      map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 37.0902, lng: -95.7129 }, // Center of the United States
+        zoom: 3,
+      });
+
+      // Define KML and KMZ layers
+      layer1 = new google.maps.KmlLayer({
+        url: 'https://www.wpc.ncep.noaa.gov/kml/conus_png/conus_pmsl_fcst_wbg_Day3.kml',
+        preserveViewport: true,
+      });
+
+      
+
+      layer2 = new google.maps.KmlLayer({
+        url: 'https://www.wpc.ncep.noaa.gov/kml/conus_png/conus_pmsl_fcst_white_12hr.kml',
+        preserveViewport: true,
+      });
+
+      layer3 = new google.maps.KmlLayer({
+        url: 'https://www.wpc.ncep.noaa.gov/kml/qpf/QPF24hr_Day1_latest.kmz',
+        preserveViewport: true,
+      });
+
+      layer4 = new google.maps.KmlLayer({
+        url: 'https://www.wpc.ncep.noaa.gov/kml/qpf/QPF72hr_Day1-3_latest.kmz',
+        preserveViewport: true,
+      });
+      
+      layer5 = new google.maps.KmlLayer({
+        url: 'https://www.wpc.ncep.noaa.gov/kml/conus_png/conus_analysis_latest_transparent.kml',
+        preserveViewport: true,
+      });
+      // Handle dropdown selection
+      const layerSelect = document.getElementById("layerSelect");
+      layerSelect.addEventListener("change", (event) => {
+        toggleLayer(event.target.value);
+      });
+    }
+
+    function toggleLayer(selectedLayer) {
+      // Hide all layers initially
+      layer1.setMap(null);
+      layer2.setMap(null);
+      layer3.setMap(null);
+      layer4.setMap(null);
+      layer5.setMap(null);
+
+      // Display the selected layer
+      if (selectedLayer === "layer1") {
+        layer1.setMap(map);
+      } else if (selectedLayer === "layer2") {
+        layer2.setMap(map);
+      } else if (selectedLayer === "layer3") {
+        layer3.setMap(map);
+    } else if (selectedLayer === "layer4") {
+        layer4.setMap(map);
+      } else if (selectedLayer === "layer5") {
+        layer5.setMap(map);
+      }
+    }
+
+    // Initialize the map on load
+    window.onload = initMap;
+  </script>
+</body>
+</html>

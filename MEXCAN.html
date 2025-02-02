@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Dashboard</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const images = document.querySelectorAll(".forecast-images-big img");
+            images.forEach(img => {
+                const originalSrc = img.src;
+                const uniqueQuery = `?t=${new Date().getTime()}`;
+                img.src = originalSrc + uniqueQuery;
+            });
+        });
+    </script>
+
+    <style>
+        body {
+            background-color: #0b1111;
+            margin: 0;
+            padding: 1px;
+            font-family: Arial, sans-serif;
+            width: 99%;
+            justify-self: center;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-around;
+            background-color: #0a4646;
+            padding: 10px;
+            margin-bottom: 5px;
+        }
+
+        h1 {
+            justify-self: center;
+            padding: 1px;
+            margin-top: 1px;
+            margin-bottom: 1px;
+            color: #bda0a0;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-style: oblique;
+        }
+        .navbar .button {
+            background-color: #27a0a0;
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            text-decoration: none;
+            font-size: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .navbar .button:hover {
+            background-color: #a55050;
+        }
+
+
+        
+        /* Container for images and content */
+        .content-container {
+            display: grid;
+            grid-row: 2 1fr;
+            gap: 1px;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        
+
+        .forecast-images img {
+            cursor: pointer;
+            padding-left: 2px;
+            max-width: 47%;
+            max-height: 35%;
+            margin: 2px;
+            justify-content: center;
+        }
+
+        .forecast-images-big img {
+            cursor: pointer;
+            height: 350;
+            max-width: 42%;
+            min-height: 200px;
+            max-height: 35%;
+            margin: 1px;
+            justify-content: center;
+        }
+
+        .full-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+
+        .full-screen img {
+            max-width: 90%;
+            max-height: 90%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Tide Charts */
+        .tides {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2px;
+            margin-top: 20px;
+        }
+
+        .tides img {
+            width: 48%;
+            height: 150px;
+            border-radius: 5px;
+        }
+
+        /* Sunset Widget */
+        .sunset {
+            text-align: center;
+            margin-top: 20px;
+            color: #fff;
+        }
+
+        /* Footer Section */
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #fff;
+        }
+
+        .station {
+            width: 98%;
+            object-fit: fill;
+            align-self: center;
+        }
+
+        .iframe-container {
+            height: 60%;
+        }
+
+        
+
+        .container {
+            display: flex;
+            gap: 10px;
+            padding-bottom: 5px;
+            padding-left: 0px;
+            padding-right: 5px;
+            justify-content: center;
+        }
+
+    .weather-card {
+      background-color: #0b2638;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      width: 40%;
+      padding: 5px;
+      text-align: center;
+    }
+
+    .weather-card h1 {
+      margin: 0;
+      font-size: 14px;
+      font-weight: bold;
+      color: #333333;
+    }
+
+    .weather-card p {
+      margin: 10px 0;
+      font-size: 14px;
+      color: #fdfcfc;
+    }
+
+        
+    </style>
+</head>
+<body>
+  
+    <!-- Navbar -->
+
+
+    
+    <div class="container">
+        
+
+
+ 
+    <!-- Content Container -->
+    <div class="content-container">
+        <!-- Weather Forecast Images -->
+        <div class="forecast-images">
+      
+
+        <h1>MEXICO</h1>
+            <img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/mex/02/GOES16-MEX-02-1000x1000.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/mex/07/GOES16-MEX-07-1000x1000.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/mex/08/GOES16-MEX-08-1000x1000.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/mex/13/GOES16-MEX-13-1000x1000.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/mex/14/GOES16-MEX-14-1000x1000.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/mex/AirMass/GOES16-MEX-AirMass-1000x1000.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/mex/DayNightCloudMicroCombo/GOES16-MEX-DayNightCloudMicroCombo-1000x1000.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/mex/FireTemperature/GOES16-MEX-FireTemperature-1000x1000.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/mex/GEOCOLOR/GOES16-MEX-GEOCOLOR-1000x1000.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/mex/Sandwich/GOES16-MEX-Sandwich-1000x1000.gif">
+
+
+
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/eep/02/GOES16-EEP-02-900x540.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/eep/07/GOES16-EEP-07-900x540.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/eep/08/GOES16-EEP-08-900x540.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/eep/13/GOES16-EEP-13-900x540.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/eep/14/GOES16-EEP-14-900x540.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/eep/AirMass/GOES16-EEP-AirMass-900x540.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/eep/DayNightCloudMicroCombo/GOES16-EEP-DayNightCloudMicroCombo-900x540.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/eep/FireTemperature/GOES16-EEP-FireTemperature-900x540.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/eep/GEOCOLOR/GOES16-EEP-GEOCOLOR-900x540.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/eep/Sandwich/GOES16-EEP-Sandwich-900x540.gif">
+
+
+<h1>CANADA</h1>
+
+ 
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/can/02/GOES16-CAN-02-1125x560.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/can/07/GOES16-CAN-07-1125x560.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/can/08/GOES16-CAN-08-1125x560.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/can/13/GOES16-CAN-13-1125x560.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/can/14/GOES16-CAN-14-1125x560.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/can/AirMass/GOES16-CAN-AirMass-1125x560.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/can/DayNightCloudMicroCombo/GOES16-CAN-DayNightCloudMicroCombo-1125x560.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/can/FireTemperature/GOES16-CAN-FireTemperature-1125x560.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/can/GEOCOLOR/GOES16-CAN-GEOCOLOR-1125x560.gif">
+<img src="https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/can/Sandwich/GOES16-CAN-Sandwich-1125x560.gif">
+        </div>
+
+            
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const forecastImages = document.querySelectorAll(".forecast-images img");
+                let fullScreenDiv = null;
+    
+                forecastImages.forEach(img => {
+                    img.addEventListener("click", () => {
+                        if (!fullScreenDiv) {
+                            fullScreenDiv = document.createElement("div");
+                            fullScreenDiv.classList.add("full-screen");
+    
+                            const fullScreenImg = document.createElement("img");
+                            fullScreenImg.src = img.src;
+                            fullScreenDiv.appendChild(fullScreenImg);
+    
+                            document.body.appendChild(fullScreenDiv);
+    
+                            fullScreenDiv.addEventListener("dblclick", () => {
+                                document.body.removeChild(fullScreenDiv);
+                                fullScreenDiv = null;
+                            });
+                        }
+                    });
+                });
+            });
+        </script>
+        </div>
+
+       
+
+     
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const forecastImages = document.querySelectorAll(".forecast-images-big img");
+                    let fullScreenDiv = null;
+        
+                    forecastImages.forEach(img => {
+                        img.addEventListener("click", () => {
+                            if (!fullScreenDiv) {
+                                fullScreenDiv = document.createElement("div");
+                                fullScreenDiv.classList.add("full-screen");
+        
+                                const fullScreenImg = document.createElement("img");
+                                fullScreenImg.src = img.src;
+                                fullScreenDiv.appendChild(fullScreenImg);
+        
+                                document.body.appendChild(fullScreenDiv);
+        
+                                fullScreenDiv.addEventListener("dblclick", () => {
+                                    document.body.removeChild(fullScreenDiv);
+                                    fullScreenDiv = null;
+                                });
+                            }
+                        });
+                    });
+                });
+            </script>
+  
+        <!-- Windy Map Iframes -->
+       
+      
+
+
+
+</body>
+</html>
