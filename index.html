@@ -8,84 +8,78 @@
     <style>
 
         body {
-            background-color: #010e0e;
-        }
-        .container {
-            background-color: #0a4646;
-            width: 60%;
-            height: 100%;
-        }
-
-        
- /* Navbar */
-         .navbar {
-            display: flex;
-            justify-content: space-around;
-            background-color: #0a4646;
-            padding: 2px;
-            margin-bottom: 3px;
-        }
-
-        .navbar .button {
-            background-color: #27a0a0;
-            color: #fff;
-            border: none;
-            padding: 8px 12px;
-            text-decoration: none;
-            font-size: 15px;
-            border-radius: 5px;
-            cursor: pointer;
             text-align: center;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #312828;
         }
 
-        .navbar .button:hover {
-            background-color: #a55050;
+        h2 {
+            margin: 20px 0;
         }
 
-        .map img {
-           
-            width: 40%;
-            height: 40%;
+        .grid-container {
+            display: grid;
+            gap: 2px;
+            padding: 3px;
+            grid-template-columns: repeat(auto-fit, minmax(850px, 1fr)); /* Responsive grid */
         }
 
-        .main {
-            background-color: #313131;
+        .grid-item {
+            background: #1f0606;
+            padding: 2px;
+            border-radius: 1px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             display: flex;
-            flex-wrap: wrap;
-            width: 100%;
-            height: auto;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        .tides {
-            justify-self: center;
-            width: 80%;
-            height: 250px;
-            max-height: 25%;
+        .grid-item iframe {
+            width: 100%;
+            height: 700px;
+            border: none;
+            object-fit: contain; /* Ensures full visibility */
+        }
+
+        .grid-item a {
+            display: block;
+            margin-top: 3px;
+            text-decoration: none;
+            color: #007BFF;
+            font-weight: bold;
+        }
+
+        .grid-item a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobile Styles */
+        @media (max-width: 600px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
 
-   
-  
 
-  
 
-    <div class="navbar">
+    <div class="grid-container">
       
-        <a href="tracking.html" class="button" target="_blank">TRACKER</a>
-        <a href="cams.html" class="button" target="_blank">CAMS</a>
-        <a href="algo.html" class="button" target="_blank">ALGO</a>
-        <a href="https://weather.cod.edu/satrad/nexrad/?parms=MOB-N0B-0-24-100-usa-ww" class="button" target="_blank">RADAR</a>
+        <div class="grid-item">
+            <iframe src="https://bamaone251.github.io/LABwx/"></iframe>
+            <a href="https://bamaone251.github.io/LABwx/" target="_blank">View Full Page</a>
+        </div>
         
+        <div class="grid-item">
+            <iframe src="https://algotraffic.com/cameras"></iframe>
+            <a href="https://algotraffic.com/cameras" target="_blank">View Full Page</a>
+        </div>
+   
     </div>
 
-  
-      <iframe width="100%" height="1000px" src="https://internetvail.com/FYC/index.php?theme=dark&lang=en-us&units=us">
-
-        </iframe>
-
-  
-    
 </body>
 </html>
