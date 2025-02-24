@@ -9,14 +9,13 @@
             background-color: black;
             font-family: Arial, sans-serif;
         }
-     .navbar {
+        .navbar {
             display: flex;
             justify-content: space-around;
             background-color: #0a4646;
             padding: 2px;
             margin-bottom: 3px;
         }
-
         .navbar .button {
             background-color: #27a0a0;
             color: #fff;
@@ -28,21 +27,24 @@
             cursor: pointer;
             text-align: center;
         }
-
         .navbar .button:hover {
             background-color: #a55050;
         }
     </style>
+    <script>
+        function updateImages() {
+            const timestamp = new Date().getTime(); // Generates a unique timestamp
+            document.getElementById("mobileBay").src = `https://www.tideschart.com/tide-charts/en/Mobile-Bay-Mobile-County-Alabama-United-States-tide-chart-6127837-ft.png?${timestamp}`;
+            document.getElementById("meaherPark").src = `https://www.tideschart.com/tide-charts/en/Meaher-State-Park-Mobile-Bay-Baldwin-County-Alabama-United-States-tide-chart-30030859-ft.png?${timestamp}`;
+            document.getElementById("gulfShores").src = `https://www.tideschart.com/tide-charts/en/Gulf-Shores-Baldwin-County-Alabama-United-States-tide-chart-6111265-ft.png?${timestamp}`;
+        }
+    </script>
 </head>
-<body>
+<body onload="updateImages()">
 
-<img width="90%" height="180vh" src="https://www.tideschart.com/tide-charts/en/Mobile-Bay-Mobile-County-Alabama-United-States-tide-chart-6127837-ft.png?">
-
-
-
-<img width="90%" height="180vh" src="https://www.tideschart.com/tide-charts/en/Meaher-State-Park-Mobile-Bay-Baldwin-County-Alabama-United-States-tide-chart-30030859-ft.png?">
-
-<img width="90%" height="180vh" src="https://www.tideschart.com/tide-charts/en/Gulf-Shores-Baldwin-County-Alabama-United-States-tide-chart-6111265-ft.png?">
+    <img id="mobileBay" width="90%" height="180vh">
+    <img id="meaherPark" width="90%" height="180vh">
+    <img id="gulfShores" width="90%" height="180vh">
 
 </body>
 </html>
