@@ -14,6 +14,7 @@
         }
    /* Navbar */
    .navbar {
+            width: ;
             display: flex;
             justify-content: space-around;
             background-color: #0f1414;
@@ -76,6 +77,12 @@
             width: 100%;
             margin-top: 5px;
         }
+
+        .iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+        }
     </style>
     <script>
         function updateImages() {
@@ -89,13 +96,19 @@
 <body onload="updateImages()">
 
     <div class="navbar">
-        
+        <a href="OUTDOORS.html" class="button" target="_blank">FISHING REPORTS</a>
         <a href="LIMITS.HTML" class="button" target="_blank">CREEL LIMITS</a>
-        <a href="baywindmap.HTML" class="button" target="_blank" >WIND MAP</a>
+        <a href="baywindmap.HTML" class="button" target="_blank">WIND</a>
         <a href="FISH.HTML" class="button" target="_blank">FISH ID</a>
   
     </div>
-
+    <div class="navbar">
+        <a href="BonSecour.HTML" class="button" target="_blank">BON SECOUR</a>
+        <a href="WeeksBay.HTML" class="button" target="_blank">WEEKS BAY</a>
+        <a href="Middle Bay.HTML" class="button" target="_blank">MIDDLE BAY</a>
+        <a href="DauphinIsland.HTML" class="button" target="_blank">DAUPHIN ISLAND</a>
+  
+    </div>
     <h2>Active Weather Alerts</h2>
 <div id="alerts">Loading alerts...</div>
 
@@ -138,13 +151,17 @@
 
     loadWeatherAlerts();
 </script>
-
+<div>
     <img id="mobileBay" class="tide-image" loading="lazy">
     <img id="meaherPark" class="tide-image" loading="lazy">
     <img id="gulfShores" class="tide-image" loading="lazy">
     <img class="tide-image" loading="lazy" src="MARCHTIDES.PNG">
-  
-    <h2>Latest Fishing Reports</h2>
+
+</body>
+    
+</div>
+        
+    <h2>Latest Podcast Episodes</h2>
     <div class="podcast-container" id="podcast-feed">Loading...</div>
 
     <script>
