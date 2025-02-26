@@ -2,38 +2,78 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Mobile Bay Tide Info</title>
     <style>
         body {
-            background-color: black;
+            background-color: rgb(204, 185, 185);
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
         }
         .navbar {
             display: flex;
-            justify-content: space-around;
+            flex-wrap: wrap;
+            justify-content: center;
             background-color: #0a4646;
-            padding: 2px;
-            margin-bottom: 3px;
+            padding: 5px;
         }
         .navbar .button {
             background-color: #27a0a0;
             color: #fff;
             border: none;
-            padding: 4px 6px;
-            text-decoration: none;
-            font-size: 10px;
+            padding: 6px 12px;
+            font-size: 12px;
             border-radius: 5px;
             cursor: pointer;
             text-align: center;
+            margin: 3px;
         }
         .navbar .button:hover {
             background-color: #a55050;
         }
+        .tide-image {
+            width: 90%;
+            max-width: 600px;
+            height: auto;
+            margin: 10px 0;
+        }
+        @media (max-width: 480px) {
+            .navbar .button {
+                font-size: 10px;
+                padding: 5px 10px;
+            }
+        }
+
+        .podcast-container {
+            max-width: 600px;
+            margin: auto;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .episode {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+        .episode:last-child {
+            border-bottom: none;
+        }
+        .episode a {
+            text-decoration: none;
+            color: #0a4646;
+            font-weight: bold;
+        }
+        .episode audio {
+            width: 100%;
+            margin-top: 5px;
+        }
     </style>
     <script>
         function updateImages() {
-            const timestamp = new Date().getTime(); // Generates a unique timestamp
+            const timestamp = new Date().getTime();
             document.getElementById("mobileBay").src = `https://www.tideschart.com/tide-charts/en/Mobile-Bay-Mobile-County-Alabama-United-States-tide-chart-6127837-ft.png?${timestamp}`;
             document.getElementById("meaherPark").src = `https://www.tideschart.com/tide-charts/en/Meaher-State-Park-Mobile-Bay-Baldwin-County-Alabama-United-States-tide-chart-30030859-ft.png?${timestamp}`;
             document.getElementById("gulfShores").src = `https://www.tideschart.com/tide-charts/en/Gulf-Shores-Baldwin-County-Alabama-United-States-tide-chart-6111265-ft.png?${timestamp}`;
@@ -42,9 +82,101 @@
 </head>
 <body onload="updateImages()">
 
-    <img id="mobileBay" width="90%" height="180vh">
-    <img id="meaherPark" width="90%" height="180vh">
-    <img id="gulfShores" width="90%" height="180vh">
+    <div class="navbar">
+        <a href="fishingreports.html" class="button" target="_blank">FISHING REPORTS</a>
+        <a href="LIMITS.pdf" class="button" target="_blank">CREEL LIMITS</a>
+        <a href="https://www.fisheries.noaa.gov/southeast/rules-regulations/fishing-regulations-and-seasonal-closures-gulf-mexico" class="button" target="_blank">SEASONS</a>
+        <a href="SPECIES.pdf" class="button" target="_blank">FISH ID</a>
+  
+    </div>
 
+    <h2>Active Weather Alerts</h2>
+<div id="alerts">Loading alerts...</div>
+
+<script>
+    async function loadWeatherAlerts() {
+        const url = 'https://api.weather.gov/alerts/active.atom?point=30.507%2C-87.8477';
+
+        try {
+            const response = await fetch(url);
+            const xmlText = await response.text();
+            const parser = new DOMParser();
+            const xml = parser.parseFromString(xmlText, "application/xml");
+
+            const entries = xml.querySelectorAll("entry");
+            let html = "";
+
+            if (entries.length === 0) {
+                html = "<p>No active weather alerts at this time.</p>";
+            } else {
+                entries.forEach(entry => {
+                    const title = entry.querySelector("title").textContent;
+                    const link = entry.querySelector("link").getAttribute("href");
+                    const summary = entry.querySelector("summary") ? entry.querySelector("summary").textContent : "";
+
+                    html += `
+                        <div class="alert">
+                            <a href="${link}" target="_blank">${title}</a>
+                            <p>${summary}</p>
+                        </div>
+                    `;
+                });
+            }
+
+            document.getElementById("alerts").innerHTML = html;
+        } catch (error) {
+            console.error("Error fetching weather alerts:", error);
+            document.getElementById("alerts").innerHTML = "<p>Error loading alerts.</p>";
+        }
+    }
+
+    loadWeatherAlerts();
+</script>
+
+    <img id="mobileBay" class="tide-image" loading="lazy">
+    <img id="meaherPark" class="tide-image" loading="lazy">
+    <img id="gulfShores" class="tide-image" loading="lazy">
+    <img class="tide-image" loading="lazy" src="http://stormsurf.com/plot/HIST_42040.png">
+  
+    <h2>Latest Podcast Episodes</h2>
+    <div class="podcast-container" id="podcast-feed">Loading...</div>
+
+    <script>
+        async function loadRSSFeed() {
+            const rssUrl = 'http://feeds.libsyn.com/119027/rss';
+            const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                
+                if (data.status !== 'ok') {
+                    document.getElementById("podcast-feed").innerHTML = "Failed to load podcast.";
+                    return;
+                }
+
+                let htmlContent = "";
+                data.items.slice(0, 5).forEach(item => {
+                    htmlContent += `
+                        <div class="episode">
+                            <a href="${item.link}" target="_blank">${item.title}</a>
+                            <br>
+                            <audio controls>
+                                <source src="${item.enclosure.link}" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                    `;
+                });
+
+                document.getElementById("podcast-feed").innerHTML = htmlContent;
+            } catch (error) {
+                console.error("Error fetching RSS feed:", error);
+                document.getElementById("podcast-feed").innerHTML = "Error loading podcast feed.";
+            }
+        }
+
+        loadRSSFeed();
+    </script>
 </body>
 </html>
