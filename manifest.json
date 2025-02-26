@@ -1,21 +1,26 @@
 {
-  "name": "Weather Dashboard",
-  "short_name": "Weather",
-  "description": "A weather dashboard showcasing weather maps and related information.",
-  "start_url": "./index.html",
+  "name": "LABwx",
+  "short_name": "LABwx",
+  "description": "A full-stack app displaying current, relative weather information for people fishing on Mobile Bay, Alabama.",
+  "start_url": "/",
   "display": "standalone",
-  "background_color": "#0b1111",
-  "theme_color": "#0a4646",
+  "background_color": "#ffffff",
+  "theme_color": "#007bff",
   "icons": [
     {
-      "src": "images.png",
+      "src": "/icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "icon-512.png",
+      "src": "/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
+  ],
+  "scope": "/",
+  "permissions": [
+    "geolocation",
+    "notifications"
   ]
 }
