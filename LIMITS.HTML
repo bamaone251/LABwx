@@ -1,2 +1,67 @@
-<iframe src="LIMITS.PNG"
-            width="100%" height="100%"></iframe>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ensures responsiveness -->
+    <style>
+        body {
+            background-color: #0b1111;
+            margin: 0;
+            padding: 1px;
+            font-family: Arial, sans-serif;
+            width: 100%; /* Ensures full width */
+        }
+
+        h1 {
+            text-align: center;
+            padding: 1px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            color: #bda0a0;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-style: oblique;
+        }
+
+        /* Image container */
+        .img {
+            display: flex;
+            justify-content: center;
+            gap: 1em;
+            flex-wrap: wrap; /* Makes images wrap on smaller screens */
+            margin: 0 auto;
+            padding: 1em;
+        }
+
+        /* Style for each image */
+        .img img {
+            object-fit: contain;
+            width: 100%; /* Ensure the images are responsive */
+            max-width: 600px; /* Restricts max width */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media screen and (max-width: 768px) {
+            .img img {
+                width: 45%; /* Adjust width on medium-sized screens */
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .img img {
+                width: 90%; /* Adjust to fit on very small screens */
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="img">
+        <img src="LIMITS1.PNG" alt="Species 1">
+        <img src="LIMITS2.PNG" alt="Species 2">
+    </div>
+</body>
+</html>
+
+
+
+
