@@ -12,27 +12,33 @@
             padding: 0;
             text-align: center;
         }
-        .navbar {
+   /* Navbar */
+   .navbar {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            background-color: #0a4646;
-            padding: 5px;
+            justify-content: space-around;
+            background-color: #0f1414;
+            padding: 2px;
+            margin-bottom: 3px;
+            margin-top: 3px;
         }
+
         .navbar .button {
             background-color: #27a0a0;
-            color: #fff;
+            color: #140909;
             border: none;
-            padding: 6px 12px;
-            font-size: 12px;
+            padding: 4px 6px;
+            text-decoration:double;
+            font-weight: bolder;
+            font-size: 14px;
             border-radius: 5px;
             cursor: pointer;
             text-align: center;
-            margin: 3px;
         }
+
         .navbar .button:hover {
             background-color: #a55050;
         }
+
         .tide-image {
             width: 90%;
             max-width: 600px;
@@ -49,7 +55,7 @@
         .podcast-container {
             max-width: 600px;
             margin: auto;
-            background: white;
+            background:     white;
             padding: 15px;
             border-radius: 8px;
             box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -83,8 +89,8 @@
 <body onload="updateImages()">
 
     <div class="navbar">
-        
-        <a href="LIMITS.HTML" class="button" target="_blank">CREEL LIMITS</a>
+        <a href="OUTDOORS.html" class="button" target="_blank">FISHING REPORTS</a>
+        <a href="LIMITS.PNG" class="button" target="_blank">CREEL LIMITS</a>
         <a href="https://www.fisheries.noaa.gov/southeast/rules-regulations/fishing-regulations-and-seasonal-closures-gulf-mexico" class="button" target="_blank">SEASONS</a>
         <a href="FISH.HTML" class="button" target="_blank">FISH ID</a>
   
@@ -136,9 +142,9 @@
     <img id="mobileBay" class="tide-image" loading="lazy">
     <img id="meaherPark" class="tide-image" loading="lazy">
     <img id="gulfShores" class="tide-image" loading="lazy">
-    
+    <img class="tide-image" loading="lazy" src="http://stormsurf.com/plot/HIST_42040.png">
   
-    <h2>Latest Fishing Reports</h2>
+    <h2>Latest Podcast Episodes</h2>
     <div class="podcast-container" id="podcast-feed">Loading...</div>
 
     <script>
