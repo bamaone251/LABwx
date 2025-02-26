@@ -1,44 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Ensures responsiveness -->
     <style>
         body {
             background-color: #0b1111;
             margin: 0;
             padding: 1px;
             font-family: Arial, sans-serif;
-            width: 100%;
-            justify-self: center;
+            width: 100%; /* Ensures full width */
         }
+
         h1 {
-            justify-self: center;
+            text-align: center;
             padding: 1px;
-            margin-top: 1px;
-            margin-bottom: 1px;
+            margin-top: 10px;
+            margin-bottom: 10px;
             color: #bda0a0;
             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
             font-style: oblique;
         }
 
+        /* Image container */
         .img {
-            display: grid;
-            object-fit: contain;
+            display: flex;
             justify-content: center;
-            align-items: center;    
-            gap: 1px;   
-            width: 100%;
-            height: 60%;
+            gap: 1em;
+            flex-wrap: wrap; /* Makes images wrap on smaller screens */
+            margin: 0 auto;
+            padding: 1em;
+        }
+
+        /* Style for each image */
+        .img img {
+            object-fit: contain;
+            width: 100%; /* Ensure the images are responsive */
+            max-width: 600px; /* Restricts max width */
+            height: auto; /* Maintain aspect ratio */
+        }
+
+        /* Responsive adjustments for smaller screens */
+        @media screen and (max-width: 768px) {
+            .img img {
+                width: 45%; /* Adjust width on medium-sized screens */
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .img img {
+                width: 90%; /* Adjust to fit on very small screens */
+            }
         }
     </style>
 </head>
 <body>
+    
     <div class="img">
-        
-      <IMG src="SPECIES-1.png">
-        <IMG src="SPECIES-2.png">
-</div>
-
-        </body>
+        <img src="SPECIES-1.png" alt="Species 1">
+        <img src="SPECIES-2.png" alt="Species 2">
+    </div>
+</body>
 </html>
-         
