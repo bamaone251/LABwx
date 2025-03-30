@@ -94,47 +94,6 @@
     </script>
 </head>
 <body>
-<div id="alerts">Loading alerts...</div>
-
-<script>
-    async function loadWeatherAlerts() {
-        const url = 'https://api.weather.gov/alerts/active.atom?point=30.507%2C-87.8477';
-
-        try {
-            const response = await fetch(url);
-            const xmlText = await response.text();
-            const parser = new DOMParser();
-            const xml = parser.parseFromString(xmlText, "application/xml");
-
-            const entries = xml.querySelectorAll("entry");
-            let html = "";
-
-            if (entries.length === 0) {
-                html = "<p>No active weather alerts at this time.</p>";
-            } else {
-                entries.forEach(entry => {
-                    const title = entry.querySelector("title").textContent;
-                    const link = entry.querySelector("link").getAttribute("href");
-                    const summary = entry.querySelector("summary") ? entry.querySelector("summary").textContent : "";
-
-                    html += `
-                        <div class="alert">
-                            <a href="${link}" target="_blank">${title}</a>
-                            <p>${summary}</p>
-                        </div>
-                    `;
-                });
-            }
-
-            document.getElementById("alerts").innerHTML = html;
-        } catch (error) {
-            console.error("Error fetching weather alerts:", error);
-            document.getElementById("alerts").innerHTML = "<p>Error loading alerts.</p>";
-        }
-    }
-
-    loadWeatherAlerts();
-</script>
 <body onload="updateImages()">
 
     <div class="navbar">
