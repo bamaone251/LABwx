@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+0<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -138,6 +138,36 @@
   
     </div>
 
+<ul id="rss-feed"></ul>
+
+    <script>
+        async function fetchRSS() {
+            const url = "https://www.weather.gov/rss_page.php?site_name=mob";
+            try {
+                const response = await fetch(url);
+                const text = await response.text();
+                const parser = new DOMParser();
+                const xml = parser.parseFromString(text, "text/xml");
+
+                const items = xml.querySelectorAll("item");
+                const feedContainer = document.getElementById("rss-feed");
+
+                for (let i = 0; i < Math.min(3, items.length); i++) {
+                    const item = items[i];
+                    const title = item.querySelector("title").textContent;
+                    const link = item.querySelector("link").textContent;
+
+                    const listItem = document.createElement("li");
+                    listItem.innerHTML = `<a href="${link}" target="_blank">${title}</a>`;
+                    feedContainer.appendChild(listItem);
+                }
+            } catch (error) {
+                console.error("Error fetching RSS feed:", error);
+            }
+        }
+
+        fetchRSS();
+    </script>
 
 
     <div class="bodybar">
