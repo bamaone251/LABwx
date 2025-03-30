@@ -121,15 +121,9 @@
 
     </style>
     <script>
-        function updateImages() {
-            const timestamp = new Date().getTime();
-            document.getElementById("mobileBay").src = `https://www.tideschart.com/tide-charts/en/Mobile-Bay-Mobile-County-Alabama-United-States-tide-chart-6127837-ft.png?${timestamp}`;
-            document.getElementById("meaherPark").src = `https://www.tideschart.com/tide-charts/en/Meaher-State-Park-Mobile-Bay-Baldwin-County-Alabama-United-States-tide-chart-30030859-ft.png?${timestamp}`;
-            document.getElementById("gulfShores").src = `https://www.tideschart.com/tide-charts/en/Gulf-Shores-Baldwin-County-Alabama-United-States-tide-chart-6111265-ft.png?${timestamp}`;
-        }
-    </script>
+    
 </head>
-<body onload="updateImages()">
+<body>
 
     <div class="navbar">
         <a href="index.html" class="button" target="_blank">WX STATION</a>
@@ -137,6 +131,49 @@
         
   
     </div>
+
+<h2>Active Weather Alerts</h2>
+<div id="alerts">Loading alerts...</div>
+
+<script>
+    async function loadWeatherAlerts() {
+        const url = 'https://api.weather.gov/alerts/active.atom?point=30.507%2C-87.8477';
+
+        try {
+            const response = await fetch(url);
+            const xmlText = await response.text();
+            const parser = new DOMParser();
+            const xml = parser.parseFromString(xmlText, "application/xml");
+
+            const entries = xml.querySelectorAll("entry");
+            let html = "";
+
+            if (entries.length === 0) {
+                html = "<p>No active weather alerts at this time.</p>";
+            } else {
+                entries.forEach(entry => {
+                    const title = entry.querySelector("title").textContent;
+                    const link = entry.querySelector("link").getAttribute("href");
+                    const summary = entry.querySelector("summary") ? entry.querySelector("summary").textContent : "";
+
+                    html += `
+                        <div class="alert">
+                            <a href="${link}" target="_blank">${title}</a>
+                            <p>${summary}</p>
+                        </div>
+                    `;
+                });
+            }
+
+            document.getElementById("alerts").innerHTML = html;
+        } catch (error) {
+            console.error("Error fetching weather alerts:", error);
+            document.getElementById("alerts").innerHTML = "<p>Error loading alerts.</p>";
+        }
+    }
+
+    loadWeatherAlerts();
+</script>
 
 <ul id="rss-feed"></ul>
 
