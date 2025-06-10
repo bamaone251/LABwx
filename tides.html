@@ -1,462 +1,211 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FishingWx</title>
-  <style>
-    body {
-      background-color: #ccc;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FishingWx</title>
+    <style>
+        body {
+            background-color: rgb(204, 185, 185);
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+   /* Navbar */
+   .navbar {
+            width: ;
+            display: flex;
+            justify-content: space-around;
+            background-color: #0f1414;
+            padding: 2px;
+            margin-bottom: 3px;
+            margin-top: 3px;
+        }
 
-    .navbar {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      background-color: #0f1414;
-      padding: 5px;
-    }
+        .navbar .button {
+            background-color: #27a0a0;
+            color: #140909;
+            border: none;
+            padding: 4px 6px;
+            text-decoration:double;
+            font-weight: bolder;
+            font-size: 14px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+        }
 
-    .button {
-      background-color: #27a0a0;
-      color: #fff;
-      border: none;
-      margin: 5px;
-      padding: 8px 12px;
-      font-weight: bold;
-      font-size: 14px;
-      border-radius: 5px;
-      cursor: pointer;
-      text-decoration: none;
-    }
+        .navbar .button:hover {
+            background-color: #a55050;
+        }
 
-    .button:hover {
-      background-color: #a55050;
-    }
+        .tide-image {
+            width: 90%;
+            max-width: 600px;
+            height: auto;
+            margin: 10px 0;
+        }
+        @media (max-width: 480px) {
+            .navbar .button {
+                font-size: 10px;
+                padding: 5px 10px;
+            }
+        }
 
-    .tide-image {
-      width: 90%;
-      max-width: 600px;
-      height: auto;
-      margin: 10px 0;
-    }
+        .podcast-container {
+            max-width: 600px;
+            margin: auto;
+            background:     white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .episode {
+            border-bottom: 1px solid #ddd;
+            padding: 10px 0;
+        }
+        .episode:last-child {
+            border-bottom: none;
+        }
+        .episode a {
+            text-decoration: none;
+            color: #0a4646;
+            font-weight: bold;
+        }
+        .episode audio {
+            width: 100%;
+            margin-top: 5px;
+        }
 
-    .podcast-container {
-      max-width: 600px;
-      margin: auto;
-      background: white;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .tidecharts {
-      width: 95%;
-      height: 40vh;
-    }
-
-    .episode {
-      border-bottom: 1px solid #ddd;
-      padding: 10px 0;
-    }
-
-    .episode:last-child {
-      border-bottom: none;
-    }
-
-    .episode a {
-      text-decoration: none;
-      color: #0a4646;
-      font-weight: bold;
-    }
-
-    .episode audio {
-      width: 100%;
-      margin-top: 5px;
-    }
-
-    audio {
-      width: 60%;
-      max-width: 600px;
-    }
-
-    @media (max-width: 600px) {
-      .button {
-        font-size: 12px;
-        padding: 6px 10px;
-      }
-
-      audio {
-        width: 90%;
-      }
-    }
-
-    .alert {
-      max-width: 600px;
-      margin: 10px auto;
-      background: #fff3f3;
-      border: 1px solid #cc0000;
-      padding: 10px;
-      border-radius: 5px;
-      text-align: left;
-    }
-
-    .alert a {
-      color: #cc0000;
-      font-weight: bold;
-    }
-  </style>
+        .iframe {
+            width: 100%;
+            height: 300px;
+            border: none;
+        }
+    </style>
+    <script>
+        function updateImages() {
+            const timestamp = new Date().getTime();
+            document.getElementById("mobileBay").src = `https://www.tideschart.com/tide-charts/en/Mobile-Bay-Mobile-County-Alabama-United-States-tide-chart-6127837-ft.png?${timestamp}`;
+            document.getElementById("meaherPark").src = `https://www.tideschart.com/tide-charts/en/Meaher-State-Park-Mobile-Bay-Baldwin-County-Alabama-United-States-tide-chart-30030859-ft.png?${timestamp}`;
+            document.getElementById("gulfShores").src = `https://www.tideschart.com/tide-charts/en/Gulf-Shores-Baldwin-County-Alabama-United-States-tide-chart-6111265-ft.png?${timestamp}`;
+        }
+    </script>
 </head>
+<body>
 <body onload="updateImages()">
 
-  <header class="navbar">
-    <a href="index.html" class="button" target="_blank">WX STATION</a>
-    <a href="baywindmap.HTML" class="button" target="_blank">WIND</a>
-    <a href="FISH.HTML" class="button" target="_blank">FISH ID</a>
-    <a href="LIMITS.HTML" class="button" target="_blank">CREEL LIMITS</a>
-    <a href="BonSecour.HTML" class="button" target="_blank">BON SECOUR</a>
-    
-    <a href="Middle Bay.HTML" class="button" target="_blank">MIDDLE BAY</a>
-    <a href="DauphinIsland.HTML" class="button" target="_blank">DAUPHIN ISLAND</a>
-  </header>
-
-  <main>
-    <h2>Active Weather Alerts</h2>
-    <div id="alerts">Loading alerts...</div>
-
-    <h2>NOAA Wx RADIO</h2>
-    <audio src="https://radio.weatherusa.net/NWR/KEC61_2.mp3" controls preload="none"></audio>
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FishingWx</title>
-  <style>
-    body {
-      background-color: #ccc;
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      text-align: center;
-    }
-
-    .navbar {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      background-color: #0f1414;
-      padding: 5px;
-    }
-
-    .button {
-      background-color: #27a0a0;
-      color: #fff;
-      border: none;
-      margin: 5px;
-      padding: 8px 12px;
-      font-weight: bold;
-      font-size: 14px;
-      border-radius: 5px;
-      cursor: pointer;
-      text-decoration: none;
-    }
-
-    .button:hover {
-      background-color: #a55050;
-    }
-
-    .tide-image {
-      width: 90%;
-      max-width: 600px;
-      height: auto;
-      margin: 10px 0;
-    }
-
-    .podcast-container {
-      max-width: 600px;
-      margin: auto;
-      background: white;
-      padding: 15px;
-      border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    .tidecharts {
-      width: 95%;
-      height: 40vh;
-    }
-
-    .episode {
-      border-bottom: 1px solid #ddd;
-      padding: 10px 0;
-    }
-
-    .episode:last-child {
-      border-bottom: none;
-    }
-
-    .episode a {
-      text-decoration: none;
-      color: #0a4646;
-      font-weight: bold;
-    }
-
-    .episode audio {
-      width: 100%;
-      margin-top: 5px;
-    }
-
-    audio {
-      width: 60%;
-      max-width: 600px;
-    }
-
-    @media (max-width: 600px) {
-      .button {
-        font-size: 12px;
-        padding: 6px 10px;
-      }
-
-      audio {
-        width: 90%;
-      }
-    }
-
-    .alert {
-      max-width: 600px;
-      margin: 10px auto;
-      background: #fff3f3;
-      border: 1px solid #cc0000;
-      padding: 10px;
-      border-radius: 5px;
-      text-align: left;
-    }
-
-    .alert a {
-      color: #cc0000;
-      font-weight: bold;
-    }
-  </style>
-</head>
-<body onload="updateImages()">
-
-  <header class="navbar">
-    <a href="index.html" class="button" target="_blank">WX STATION</a>
-    <a href="baywindmap.HTML" class="button" target="_blank">WIND</a>
-    <a href="FISH.HTML" class="button" target="_blank">FISH ID</a>
-    <a href="LIMITS.HTML" class="button" target="_blank">CREEL LIMITS</a>
-    <a href="BonSecour.HTML" class="button" target="_blank">BON SECOUR</a>
-    
-    <a href="Middle Bay.HTML" class="button" target="_blank">MIDDLE BAY</a>
-    <a href="DauphinIsland.HTML" class="button" target="_blank">DAUPHIN ISLAND</a>
-  </header>
-
-  <main>
-    <h2>Active Weather Alerts</h2>
-    <div id="alerts">Loading alerts...</div>
-
-    <h2>NOAA Wx RADIO</h2>
-    <audio src="https://radio.weatherusa.net/NWR/KEC61_2.mp3" controls preload="none"></audio>
-
-    <iframe src="http://g.disl.edu/d-solo/GsEhpsXVz/wall-bon-secour-us?orgId=2&refresh=30m&kiosk=&from=1747796777899&to=1747883177899&timezone=browser&theme=dark&panelId=5&__feature.dashboardSceneSolo" width="450" height="200" frameborder="0"></iframe>
-
-    <iframe src="http://g.disl.edu/d-solo/KviOBVr4k/wall-middle-bay-us?orgId=2&refresh=30m&kiosk=&from=1747796905282&to=1747883305282&timezone=browser&theme=dark&panelId=28&__feature.dashboardSceneSolo" width="450" height="200" frameborder="0"></iframe>
-
-    <iframe src="http://g.disl.edu/d-solo/GsEhpsXVz/wall-bon-secour-us?orgId=2&refresh=30m&kiosk=&from=1747796983913&to=1747883383913&timezone=browser&theme=dark&panelId=25&__feature.dashboardSceneSolo" width="450" height="200" frameborder="0"></iframe>
-
-
-
-
-    <iframe src="http://g.disl.edu/d-solo/GsEhpsXVz/wall-bon-secour-us?orgId=2&refresh=30m&from=1747796983913&to=1747883383913&timezone=browser&kiosk=&panelId=27&__feature.dashboardSceneSolo" width="450" height="200" frameborder="0"></iframe>
-    <div >
-      <img id="mobileBay" class="tidecharts" alt="Mobile Bay Tide Chart" loading="lazy">
-      <img id="meaherPark" class="tidecharts" alt="Meaher Park Tide Chart" loading="lazy">
-      <img id="gulfShores" class="tidecharts" alt="Gulf Shores Tide Chart" loading="lazy">
-      <img class="tide-image" src="maytides.PNG" alt="May Tides" loading="lazy">
+    <div class="navbar">
+        <a href="index.html" class="button" target="_blank">WX STATION</a>
+        <a href="baywindmap.HTML" class="button" target="_blank">WIND</a>
+        <a href="FISH.HTML" class="button" target="_blank">FISH ID</a>
+        <a href="LIMITS.HTML" class="button" target="_blank">CREEL LIMITS</a>
+  
     </div>
+    <div class="navbar">
+        <a href="BonSecour.HTML" class="button" target="_blank">BON SECOUR</a>
+        <a href="WeeksBay.HTML" class="button" target="_blank">WEEKS BAY</a>
+        <a href="Middle Bay.HTML" class="button" target="_blank">MIDDLE BAY</a>
+        
+        <a href="DauphinIsland.HTML" class="button" target="_blank">DAUPHIN ISLAND</a>
+  
+    </div>
+    <h2>Active Weather Alerts</h2>
+<div id="alerts">Loading alerts...</div>
 
-    <h2>Latest Fishing Reports</h2>
-    <div class="podcast-container" id="podcast-feed">Loading...</div>
-  </main>
-
-  <script>
-    function updateImages() {
-      const timestamp = new Date().getTime();
-      document.getElementById("mobileBay").src = `https://www.tideschart.com/tide-charts/en/Mobile-Bay-Mobile-County-Alabama-United-States-tide-chart-6127837-ft.png?${timestamp}`;
-      document.getElementById("meaherPark").src = `https://www.tideschart.com/tide-charts/en/Meaher-State-Park-Mobile-Bay-Baldwin-County-Alabama-United-States-tide-chart-30030859-ft.png?${timestamp}`;
-      document.getElementById("gulfShores").src = `https://www.tideschart.com/tide-charts/en/Gulf-Shores-Baldwin-County-Alabama-United-States-tide-chart-6111265-ft.png?${timestamp}`;
-    }
-
+<script>
     async function loadWeatherAlerts() {
-      const url = 'https://api.weather.gov/alerts/active.atom?point=30.507%2C-87.8477';
-      try {
-        const response = await fetch(url);
-        const xmlText = await response.text();
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(xmlText, "application/xml");
+        const url = 'https://api.weather.gov/alerts/active.atom?point=30.507%2C-87.8477';
 
-        const entries = xml.querySelectorAll("entry");
-        let html = "";
+        try {
+            const response = await fetch(url);
+            const xmlText = await response.text();
+            const parser = new DOMParser();
+            const xml = parser.parseFromString(xmlText, "application/xml");
 
-        if (entries.length === 0) {
-          html = "<p>No active weather alerts at this time.</p>";
-        } else {
-          entries.forEach(entry => {
-            const title = entry.querySelector("title").textContent;
-            const link = entry.querySelector("link").getAttribute("href");
-            const summary = entry.querySelector("summary")?.textContent || "";
+            const entries = xml.querySelectorAll("entry");
+            let html = "";
 
-            html += `
-              <div class="alert">
-                <a href="${link}" target="_blank">${title}</a>
-                <p>${summary}</p>
-              </div>
-            `;
-          });
+            if (entries.length === 0) {
+                html = "<p>No active weather alerts at this time.</p>";
+            } else {
+                entries.forEach(entry => {
+                    const title = entry.querySelector("title").textContent;
+                    const link = entry.querySelector("link").getAttribute("href");
+                    const summary = entry.querySelector("summary") ? entry.querySelector("summary").textContent : "";
+
+                    html += `
+                        <div class="alert">
+                            <a href="${link}" target="_blank">${title}</a>
+                            <p>${summary}</p>
+                        </div>
+                    `;
+                });
+            }
+
+            document.getElementById("alerts").innerHTML = html;
+        } catch (error) {
+            console.error("Error fetching weather alerts:", error);
+            document.getElementById("alerts").innerHTML = "<p>Error loading alerts.</p>";
         }
-
-        document.getElementById("alerts").innerHTML = html;
-      } catch (error) {
-        console.error("Error fetching weather alerts:", error);
-        document.getElementById("alerts").innerHTML = "<p>Error loading alerts.</p>";
-      }
-    }
-
-    async function loadRSSFeed() {
-      const rssUrl = 'http://feeds.libsyn.com/119027/rss';
-      const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-
-      try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-
-        if (data.status !== 'ok') {
-          document.getElementById("podcast-feed").innerHTML = "Failed to load podcast.";
-          return;
-        }
-
-        let htmlContent = "";
-        data.items.slice(0, 3).forEach(item => {
-          htmlContent += `
-            <div class="episode">
-              <a href="${item.link}" target="_blank">${item.title}</a><br>
-              <audio controls>
-                <source src="${item.enclosure.link}" type="audio/mpeg">
-                Your browser does not support the audio element.
-              </audio>
-            </div>
-          `;
-        });
-
-        document.getElementById("podcast-feed").innerHTML = htmlContent;
-      } catch (error) {
-        console.error("Error fetching RSS feed:", error);
-        document.getElementById("podcast-feed").innerHTML = "Error loading podcast feed.";
-      }
     }
 
     loadWeatherAlerts();
-    loadRSSFeed();
-  </script>
+</script>
+
+    <h2>NOAA Wx RADIO</h2>
+<audio id="audio_player" src="https://radio.weatherusa.net/NWR/KEC61_2.mp3" type="audio/mp3" controls="" preload="none" onplay="audio_player_event(&quot;onplay&quot;) " onpause="audio_player_event(&quot;onpause&quot;)" onsuspend="audio_player_event(&quot;onsuspend&quot;)" onloadedmetadata="audio_player_event(&quot;onloadedmetadata&quot;)" style="width: 60%"> </audio>
+    
+<div>
+    <img id="mobileBay" class="tide-image" loading="lazy">
+    <img id="meaherPark" class="tide-image" loading="lazy">
+    <img id="gulfShores" class="tide-image" loading="lazy">
+    <img class="tide-image" loading="lazy" src="maytides.PNG">
+
 </body>
-</html>
-
-
-    <div >
-      <img id="mobileBay" class="tidecharts" alt="Mobile Bay Tide Chart" loading="lazy">
-      <img id="meaherPark" class="tidecharts" alt="Meaher Park Tide Chart" loading="lazy">
-      <img id="gulfShores" class="tidecharts" alt="Gulf Shores Tide Chart" loading="lazy">
-      <img class="tide-image" src="maytides.PNG" alt="May Tides" loading="lazy">
-    </div>
-
+    
+</div>
+        
     <h2>Latest Fishing Reports</h2>
     <div class="podcast-container" id="podcast-feed">Loading...</div>
-  </main>
 
-  <script>
-    function updateImages() {
-      const timestamp = new Date().getTime();
-      document.getElementById("mobileBay").src = `https://www.tideschart.com/tide-charts/en/Mobile-Bay-Mobile-County-Alabama-United-States-tide-chart-6127837-ft.png?${timestamp}`;
-      document.getElementById("meaherPark").src = `https://www.tideschart.com/tide-charts/en/Meaher-State-Park-Mobile-Bay-Baldwin-County-Alabama-United-States-tide-chart-30030859-ft.png?${timestamp}`;
-      document.getElementById("gulfShores").src = `https://www.tideschart.com/tide-charts/en/Gulf-Shores-Baldwin-County-Alabama-United-States-tide-chart-6111265-ft.png?${timestamp}`;
-    }
+    <script>
+        async function loadRSSFeed() {
+            const rssUrl = 'http://feeds.libsyn.com/119027/rss';
+            const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
 
-    async function loadWeatherAlerts() {
-      const url = 'https://api.weather.gov/alerts/active.atom?point=30.507%2C-87.8477';
-      try {
-        const response = await fetch(url);
-        const xmlText = await response.text();
-        const parser = new DOMParser();
-        const xml = parser.parseFromString(xmlText, "application/xml");
+            try {
+                const response = await fetch(apiUrl);
+                const data = await response.json();
+                
+                if (data.status !== 'ok') {
+                    document.getElementById("podcast-feed").innerHTML = "Failed to load podcast.";
+                    return;
+                }
 
-        const entries = xml.querySelectorAll("entry");
-        let html = "";
+                let htmlContent = "";
+                data.items.slice(0, 3).forEach(item => {
+                    htmlContent += `
+                        <div class="episode">
+                            <a href="${item.link}" target="_blank">${item.title}</a>
+                            <br>
+                            <audio controls>
+                                <source src="${item.enclosure.link}" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                    `;
+                });
 
-        if (entries.length === 0) {
-          html = "<p>No active weather alerts at this time.</p>";
-        } else {
-          entries.forEach(entry => {
-            const title = entry.querySelector("title").textContent;
-            const link = entry.querySelector("link").getAttribute("href");
-            const summary = entry.querySelector("summary")?.textContent || "";
-
-            html += `
-              <div class="alert">
-                <a href="${link}" target="_blank">${title}</a>
-                <p>${summary}</p>
-              </div>
-            `;
-          });
+                document.getElementById("podcast-feed").innerHTML = htmlContent;
+            } catch (error) {
+                console.error("Error fetching RSS feed:", error);
+                document.getElementById("podcast-feed").innerHTML = "Error loading podcast feed.";
+            }
         }
 
-        document.getElementById("alerts").innerHTML = html;
-      } catch (error) {
-        console.error("Error fetching weather alerts:", error);
-        document.getElementById("alerts").innerHTML = "<p>Error loading alerts.</p>";
-      }
-    }
-
-    async function loadRSSFeed() {
-      const rssUrl = 'http://feeds.libsyn.com/119027/rss';
-      const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
-
-      try {
-        const response = await fetch(apiUrl);
-        const data = await response.json();
-
-        if (data.status !== 'ok') {
-          document.getElementById("podcast-feed").innerHTML = "Failed to load podcast.";
-          return;
-        }
-
-        let htmlContent = "";
-        data.items.slice(0, 3).forEach(item => {
-          htmlContent += `
-            <div class="episode">
-              <a href="${item.link}" target="_blank">${item.title}</a><br>
-              <audio controls>
-                <source src="${item.enclosure.link}" type="audio/mpeg">
-                Your browser does not support the audio element.
-              </audio>
-            </div>
-          `;
-        });
-
-        document.getElementById("podcast-feed").innerHTML = htmlContent;
-      } catch (error) {
-        console.error("Error fetching RSS feed:", error);
-        document.getElementById("podcast-feed").innerHTML = "Error loading podcast feed.";
-      }
-    }
-
-    loadWeatherAlerts();
-    loadRSSFeed();
-  </script>
+        loadRSSFeed();
+    </script>
 </body>
 </html>
